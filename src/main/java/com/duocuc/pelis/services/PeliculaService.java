@@ -9,6 +9,8 @@ import java.util.Optional;
 @Service
 public interface PeliculaService {
 
+    Pelicula guardarPelicula(Pelicula pelicula);
     List<Pelicula> getPeliculas();
-    Optional<Pelicula> getPeliculaById(int id);
+    Pelicula getPeliculaById(int id);
+    void eliminarPelicula(int id);
 }

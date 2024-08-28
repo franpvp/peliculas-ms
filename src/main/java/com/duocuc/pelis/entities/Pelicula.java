@@ -1,28 +1,42 @@
 package com.duocuc.pelis.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "PELICULA")
 public class Pelicula {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pelicula")
+    private Integer id;
+    @Column(name = "titulo", length = 100)
     private String titulo;
+    @Column(name = "anio")
     private int anio;
+    @Column(name = "director", length = 60)
     private String director;
+    @Column(name = "genero", length = 60)
     private String genero;
+    @Column(name = "sinopsis", length = 255)
     private String sinopsis;
 
-    public Pelicula(String titulo, int id, int anio, String director, String genero, String sinopsis) {
+    public Pelicula() {
+    }
+
+    public Pelicula(String titulo, int anio, String director, String genero, String sinopsis) {
         this.titulo = titulo;
-        this.id = id;
         this.anio = anio;
         this.director = director;
         this.genero = genero;
         this.sinopsis = sinopsis;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

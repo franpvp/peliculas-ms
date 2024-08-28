@@ -1,8 +1,9 @@
 package com.duocuc.pelis.services;
 
 import com.duocuc.pelis.entities.Pelicula;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.duocuc.pelis.repository.PeliculaRepository;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,25 +15,41 @@ public class PeliculaServiceImpl implements PeliculaService{
 
     private final List<Pelicula> listaPeliculas = new ArrayList<>();
 
-    public PeliculaServiceImpl() {
+    @Autowired
+    private PeliculaRepository peliculaRepository;
+
+    @PostConstruct
+    public void init() {
         // Inicialización de objetos Pelicula
-        listaPeliculas.add(new Pelicula("Mi Película Favorita", 1, 2020, "Director Ejemplo", "Drama", "Una breve descripción de la película."));
-        listaPeliculas.add(new Pelicula("Otra Película", 2, 2021, "Director 2", "Comedia", "Otra breve descripción de la película."));
-        listaPeliculas.add(new Pelicula("Película 3", 3, 2019, "Director 3", "Acción", "Descripción de la película 3."));
-        listaPeliculas.add(new Pelicula("Película 4", 4, 2022, "Director 4", "Thriller", "Descripción de la película 4."));
-        listaPeliculas.add(new Pelicula("Película 5", 5, 2023, "Director 5", "Ciencia Ficción", "Descripción de la película 5."));
+        listaPeliculas.add(new Pelicula("Inception", 2010, "Christopher Nolan", "Ciencia Ficción", "Un ladrón que roba secretos corporativos mediante el uso de la tecnología de compartir sueños es dado la tarea inversa: implantar una idea en la mente de un CEO."));
+        listaPeliculas.add(new Pelicula("Parasite", 2019, "Bong Joon-ho", "Drama", "Una historia sobre la coexistencia y el conflicto entre dos familias de diferentes clases sociales."));
+        listaPeliculas.add(new Pelicula("The Dark Knight", 2008, "Christopher Nolan", "Acción", "Batman debe aceptar uno de los mayores desafíos psicológicos y físicos para derrotar al Joker."));
+        listaPeliculas.add(new Pelicula("Pulp Fiction", 1994, "Quentin Tarantino", "Thriller", "Las vidas de dos matones de la mafia, una esposa de gánster, un boxeador y un par de bandidos se entrelazan en cuatro relatos de violencia y redención."));
+        listaPeliculas.add(new Pelicula("Interstellar", 2014, "Christopher Nolan", "Ciencia Ficción", "Un grupo de exploradores viajan a través de un agujero de gusano en el espacio en un intento por asegurar el futuro de la humanidad."));
+
+        for (Pelicula pelicula : listaPeliculas) {
+            peliculaRepository.save(pelicula);
+        }
+    }
+
+    @Override
+    public Pelicula guardarPelicula(Pelicula pelicula) {
+        return peliculaRepository.save(pelicula);
     }
 
     @Override
     public List<Pelicula> getPeliculas() {
-        return listaPeliculas;
+        return peliculaRepository.findAll();
     }
 
     @Override
-    public Optional<Pelicula> getPeliculaById(int id) {
-        return listaPeliculas.stream()
-                .filter(pelicula -> pelicula.getId() == id)
-                .findFirst();
+    public Pelicula getPeliculaById(int id) {
+        return peliculaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void eliminarPelicula(int id) {
+        peliculaRepository.deleteById(id);
     }
 
 }
