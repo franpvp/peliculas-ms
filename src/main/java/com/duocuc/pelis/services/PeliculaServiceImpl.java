@@ -26,6 +26,7 @@ public class PeliculaServiceImpl implements PeliculaService{
         listaPeliculas.add(new Pelicula("The Dark Knight", 2008, "Christopher Nolan", "Acción", "Batman debe aceptar uno de los mayores desafíos psicológicos y físicos para derrotar al Joker."));
         listaPeliculas.add(new Pelicula("Pulp Fiction", 1994, "Quentin Tarantino", "Thriller", "Las vidas de dos matones de la mafia, una esposa de gánster, un boxeador y un par de bandidos se entrelazan en cuatro relatos de violencia y redención."));
         listaPeliculas.add(new Pelicula("Interstellar", 2014, "Christopher Nolan", "Ciencia Ficción", "Un grupo de exploradores viajan a través de un agujero de gusano en el espacio en un intento por asegurar el futuro de la humanidad."));
+        listaPeliculas.add(new Pelicula("The Matrix", 1999, "The Wachowskis", "Ciencia Ficción", "Un programador descubre que el mundo en el que vive es una simulación virtual controlada por una inteligencia artificial, y se une a un grupo de rebeldes para luchar por la libertad de la humanidad."));
 
         for (Pelicula pelicula : listaPeliculas) {
             peliculaRepository.save(pelicula);

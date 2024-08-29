@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/ms-peliculas")
 public class PeliculaController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class PeliculaController {
         return peliculaService.getPeliculas();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/peliculas/{id}")
     public Pelicula getPeliculaById(@PathVariable("id") int id) {
         return peliculaService.getPeliculaById(id);
     }
