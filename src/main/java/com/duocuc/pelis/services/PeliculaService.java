@@ -1,6 +1,5 @@
 package com.duocuc.pelis.services;
 import com.duocuc.pelis.entities.Pelicula;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,5 +11,7 @@ public interface PeliculaService {
     Pelicula guardarPelicula(Pelicula pelicula);
     List<Pelicula> getPeliculas();
     Pelicula getPeliculaById(int id);
+    Optional<Pelicula> modificarPelicula(int id, Pelicula pelicula);
     void eliminarPelicula(int id);
+    void eliminarAll();
 }
