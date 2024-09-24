@@ -1,7 +1,7 @@
-package com.duocuc.pelis.controllers;
+package com.duocuc.pelis.controller;
 
-import com.duocuc.pelis.entities.Pelicula;
-import com.duocuc.pelis.services.PeliculaService;
+import com.duocuc.pelis.entities.PeliculaEntity;
+import com.duocuc.pelis.service.PeliculaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,26 +18,26 @@ public class PeliculaController {
     private PeliculaService peliculaService;
 
     @PostMapping("/crear-pelicula")
-    public void crearPelicula(@RequestBody Pelicula pelicula) {
-        peliculaService.guardarPelicula(pelicula);
+    public void crearPelicula(@RequestBody PeliculaEntity peliculaEntity) {
+        peliculaService.guardarPelicula(peliculaEntity);
     }
 
     @GetMapping("/peliculas")
-    public List<Pelicula> getPeliculas() {
+    public List<PeliculaEntity> getPeliculas() {
         return peliculaService.getPeliculas();
     }
 
     @GetMapping("/peliculas/{id}")
-    public Pelicula getPeliculaById(@PathVariable("id") int id) {
+    public PeliculaEntity getPeliculaById(@PathVariable("id") int id) {
         return peliculaService.getPeliculaById(id);
     }
 
     @PutMapping("/modificar-pelicula/{id}")
-    public ResponseEntity<Pelicula> modificarPelicula(
+    public ResponseEntity<PeliculaEntity> modificarPelicula(
             @PathVariable("id") int id,
-            @RequestBody Pelicula peliculaUpdate
+            @RequestBody PeliculaEntity peliculaEntityUpdate
     ) {
-        Optional<Pelicula> peliculaActualizada = peliculaService.modificarPelicula(id, peliculaUpdate);
+        Optional<PeliculaEntity> peliculaActualizada = peliculaService.modificarPelicula(id, peliculaEntityUpdate);
         if (peliculaActualizada.isPresent()) {
             return ResponseEntity.ok(peliculaActualizada.get());
         } else {

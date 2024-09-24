@@ -1,30 +1,39 @@
 package com.duocuc.pelis.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
+
+@Builder
 @Entity
 @Table(name = "PELICULA")
-public class Pelicula {
+public class PeliculaEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pelicula")
-    private Integer id;
+    private Integer idPelicula;
+
     @Column(name = "titulo", length = 100)
     private String titulo;
+
     @Column(name = "anio")
     private int anio;
+
     @Column(name = "director", length = 60)
     private String director;
+
     @Column(name = "genero", length = 60)
     private String genero;
+
     @Column(name = "sinopsis", length = 255)
     private String sinopsis;
 
-    public Pelicula() {
+    public PeliculaEntity() {
     }
 
-    public Pelicula(String titulo, int anio, String director, String genero, String sinopsis) {
+    public PeliculaEntity(Integer idPelicula, String titulo, int anio, String director, String genero, String sinopsis) {
+        this.idPelicula = idPelicula;
         this.titulo = titulo;
         this.anio = anio;
         this.director = director;
@@ -32,12 +41,12 @@ public class Pelicula {
         this.sinopsis = sinopsis;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdPelicula() {
+        return idPelicula;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdPelicula(Integer idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
     public String getTitulo() {
@@ -79,19 +88,4 @@ public class Pelicula {
     public void setSinopsis(String sinopsis) {
         this.sinopsis = sinopsis;
     }
-
-    @Override
-    public String toString() {
-        return "Pelicula{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", anio=" + anio +
-                ", director='" + director + '\'' +
-                ", genero='" + genero + '\'' +
-                ", sinopsis='" + sinopsis + '\'' +
-                '}';
-    }
-
-    // a.	GET /peliculas/{id}: Para obtener información detallada sobre una película en función de su ID.
-    // b.	GET/películas: Para obtener toda la información detallada sobre las películas que se encuentren registradas.
 }
